@@ -28,7 +28,8 @@ def partial_ssrf():
     resp = requests.get(f"https://api.example.com/user_info/{user_id}",
                        params={"userId": user_id}
                        )
-
+    
+    # Should be sanitized via input validation on source
     if user_id.isalnum():
         # GOOD: user_id is restricted to be alpha-numeric, and cannot alter path component of URL
         resp = requests.get("https://api.example.com/user_info/" + user_id)
